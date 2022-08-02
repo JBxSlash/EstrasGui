@@ -18,7 +18,7 @@
 #DOCUMENTATION
 First Off, We need to get the module, to do that type: 
 
-local module = loadstring(game:HttpGet("https://raw.githubusercontent.com/JBxSlash/EstrasGui/main/EstrasGUI.lua"))
+local module = loadstring(game:HttpGet("https://raw.githubusercontent.com/JBxSlash/EstrasGui/main/EstrasGUI.lua"))()
 
 Next we need to make the main frame, or the menu, to do that type:
 
