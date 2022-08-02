@@ -238,6 +238,7 @@ function CVSNewTab(frame,name)
 				["NewCheck"] = bool;
 				["NewInt"] = newInt;
 				["NewNumber"] = newInt;
+				["NewButton"] = button;
 			}
 			return ret
 		end
