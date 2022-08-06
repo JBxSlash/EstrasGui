@@ -238,7 +238,6 @@ function CVSNewTab(frame,name)
 				["NewCheck"] = bool;
 				["NewInt"] = newInt;
 				["NewNumber"] = newInt;
-				["NewButton"] = button;
 			}
 			return ret
 		end
@@ -260,6 +259,116 @@ function CVSNewTab(frame,name)
 		return ret
 	else
 		return errorstate.InvalidType
+	end
+end
+function module.Notification(frame,txt,delayed)
+	if delayed then
+		if typeof(frame) ~= "table" then
+			return errorstate.InvalidType
+		end
+		if frame[1] ~= "ValidEstraFrame" then
+			return errorstate.InvalidType
+		end
+		local Notification = Instance.new("Frame")
+		local TextLabel = Instance.new("TextLabel")
+		local bar = Instance.new("Frame")
+
+		Notification.Name = "Notification"
+		Notification.Parent = frame[2]
+		Notification.AnchorPoint = Vector2.new(0, 1)
+		Notification.BackgroundColor3 = Color3.fromRGB(18, 18, 20)
+		Notification.BorderSizePixel = 0
+		Notification.Position = UDim2.new(0.669398904, 0, 0.982869387, 0)
+		Notification.Size = UDim2.new(0, 236, 0, 25)
+
+		TextLabel.Parent = Notification
+		TextLabel.AnchorPoint = Vector2.new(0, 1)
+		TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel.BackgroundTransparency = 1.000
+		TextLabel.Position = UDim2.new(0.0296610165, 0, 0.941663146, 0)
+		TextLabel.Size = UDim2.new(0.940677941, 0, 0.767750084, 0)
+		TextLabel.Font = Enum.Font.SourceSansSemibold
+		TextLabel.Text = txt
+		TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+		TextLabel.TextSize = 25.000
+		TextLabel.TextWrapped = true
+		TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+		TextLabel.RichText = true
+		TextLabel.AutomaticSize = Enum.AutomaticSize.Y
+		Notification.AutomaticSize = Enum.AutomaticSize.Y
+		
+		bar.Name = "bar"
+		bar.Parent = Notification
+		bar.BackgroundColor3 = Color3.fromRGB(255, 149, 79)
+		bar.BorderSizePixel = 0
+		bar.Position = UDim2.new(0, 0, 1, 0)
+		bar.Size = UDim2.new(0, 236, 0, 5)
+		local added = #frame[2]:GetChildren()
+		Notification.Position = UDim2.new(0.67,0,1.125,-35*(#frame[2]:GetChildren()-3))
+		game:GetService("TweenService"):Create(bar,TweenInfo.new(3),{Size = UDim2.new(0, 0, 0, 5)}):Play(0)
+		local c = frame[2].ChildRemoved:Connect(function()
+			if Notification then
+				added -= 1
+				Notification.Position = UDim2.new(0.67,0,1.125,-35*(added-3))
+			end
+		end)
+		wait(3)
+		Notification:Destroy()
+		c:Disconnect()
+		return true
+	else
+		spawn(function()
+			if typeof(frame) ~= "table" then
+				return errorstate.InvalidType
+			end
+			if frame[1] ~= "ValidEstraFrame" then
+				return errorstate.InvalidType
+			end
+			local Notification = Instance.new("Frame")
+			local TextLabel = Instance.new("TextLabel")
+			local bar = Instance.new("Frame")
+
+			Notification.Name = "Notification"
+			Notification.Parent = frame[2]
+			Notification.AnchorPoint = Vector2.new(0, 1)
+			Notification.BackgroundColor3 = Color3.fromRGB(18, 18, 20)
+			Notification.BorderSizePixel = 0
+			Notification.Position = UDim2.new(0.669398904, 0, 0.982869387, 0)
+			Notification.Size = UDim2.new(0, 236, 0, 25)
+
+			TextLabel.Parent = Notification
+			TextLabel.AnchorPoint = Vector2.new(0, 1)
+			TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel.BackgroundTransparency = 1.000
+			TextLabel.Position = UDim2.new(0.0296610165, 0, 0.941663146, 0)
+			TextLabel.Size = UDim2.new(0.940677941, 0, 0.767750084, 0)
+			TextLabel.Font = Enum.Font.SourceSansSemibold
+			TextLabel.Text = txt
+			TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel.TextSize = 25.000
+			TextLabel.TextWrapped = true
+			TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+			bar.Name = "bar"
+			bar.Parent = Notification
+			bar.BackgroundColor3 = Color3.fromRGB(255, 149, 79)
+			bar.BorderSizePixel = 0
+			bar.Position = UDim2.new(0, 0, 1, 0)
+			bar.Size = UDim2.new(0, 236, 0, 5)
+			local added = #frame[2]:GetChildren()
+			Notification.Position = UDim2.new(0.67,0,1.125,-35*(#frame[2]:GetChildren()-3))
+			game:GetService("TweenService"):Create(bar,TweenInfo.new(3),{Size = UDim2.new(0, 0, 0, 5)}):Play(0)
+			local c = frame[2].ChildRemoved:Connect(function()
+				if Notification then
+					added -= 1
+					Notification.Position = UDim2.new(0.67,0,1.125,-35*(added-3))
+				end
+			end)
+			wait(3)
+			Notification:Destroy()
+			c:Disconnect()
+			return true
+		end)
 	end
 end
 function module.NewFrame(nameOf,pos,par,theme)
